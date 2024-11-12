@@ -5,8 +5,10 @@ use Rechtlogisch\WirtschaftsId\Dto\ValidationResult;
 it('returns null as first error when no errors set', function () {
     $dto = new ValidationResult;
     $firstError = $dto->getFirstError();
+    $firstErrorKey = $dto->getFirstErrorKey();
 
-    expect($firstError)->toBeNull();
+    expect($firstError)->toBeNull()
+        ->and($firstErrorKey)->toBeNull();
 });
 
 it('gets contains unterscheidungsmerkmal', function () {
