@@ -101,7 +101,7 @@ use Rechtlogisch\WirtschaftsId\WirtschaftsId;
 You can get a list of hints explaining why the provided input is not plausible. Hints do not change the validation result.  The `validate()` method returns a DTO with a `getHints()` method.
 
 > [!NOTE]
-> The keys of `getHints()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdLength::class`.
+> The keys of `getHints()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2026::class`.
 
 ```php
 validateWirtschaftsId('DE123456788-00002')->getHints();
