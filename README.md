@@ -39,13 +39,20 @@ use Rechtlogisch\WirtschaftsId\WirtschaftsId;
 
 ## Unterscheidungsmerkmal, short: U-Merkmal
 
-This package supports both validation of the Wirtschafts-ID with and without the Unterscheidungsmerkmal. It is optional information after the eleventh character and separator. It consists of a hyphen and a five-digit number. It starts at `00001` and therefore `00000` is not valid. 
+This package supports both validation of the Wirtschafts-ID with and without the Unterscheidungsmerkmal. It is optional information after the eleventh character and separator. It consists of a hyphen and a five-digit number.
 
-At first all entities will receive a Wirtschafts-ID with the Unterscheidungsmerkmal `-00001`. If needed, as of 2026 each economic activity (wirtschaftliche Tätigkeit) will receive a [separate Unterscheidungsmerkmal](https://www.bzst.de/DE/Unternehmen/Identifikationsnummern/Wirtschafts-Identifikationsnummer/wirtschaftsidentifikationsnummer_node.html#:~:text=Sofern%20Sie%20mehrere%20wirtschaftliche%20T%C3%A4tigkeiten%20aus%C3%BCben%2C%20vergibt%20das%20BZSt%20hierf%C3%BCr%20weitere%20Unterscheidungsmerkmale%20(bspw.%20%2D00002%20f%C3%BCr%20eine%20zweite%20wirtschaftliche%20T%C3%A4tigkeit)%20ab%202026.), which will be incremented by one for each economic activity and linked to a tax number of the business or the permanent establishment within the responsible tax office.
+> [!NOTE]
+> Unterscheidungsmerkmal starts at `00001` and therefore `00000` is not valid. 
 
-Based on the form/dataset you might need to provide the Unterscheidungsmerkmal or not.
+> [!TIP]
+> At first all entities will receive a Wirtschafts-ID with the Unterscheidungsmerkmal `-00001`. If needed, as of 2026 each economic activity (wirtschaftliche Tätigkeit) will receive a separate Unterscheidungsmerkmal, which will be incremented by one for each economic activity and linked to a tax number of the business or the permanent establishment within the responsible tax office.
+> 
+> Source: [BZSt](https://www.bzst.de/DE/Unternehmen/Identifikationsnummern/Wirtschafts-Identifikationsnummer/wirtschaftsidentifikationsnummer_node.html#js-toc-entry4)
 
-Examples:
+> [!TIP]
+> Based on the form/dataset you might need to provide the Unterscheidungsmerkmal or not.
+
+### Examples
 
 ```php
 isWirtschaftsIdValid('DE123456788-00001'); // => true
@@ -66,12 +73,12 @@ use Rechtlogisch\WirtschaftsId\WirtschaftsId;
 You can get a list of errors explaining why the provided input is invalid. The `validate()` method returns a DTO with a `getErrors()` method.
 
 > [!NOTE]
-> The keys of `getErrors()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdLength::class`.
+> The keys of `getErrors()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdWithoutUnterscheidungsmerkmalLength::class`.
 
 ```php
 validateWirtschaftsId('DE12345678')->getErrors();
 // [
-//   'Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdLength'
+//   'Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdWithoutUnterscheidungsmerkmalLength'
 //    => 'Wirtschafts-ID must be 11 characters long. Provided Wirtschafts-ID is: 10 characters long.',
 // ]
 ```
@@ -84,14 +91,14 @@ use Rechtlogisch\WirtschaftsId\WirtschaftsId;
     ->validate()
     ->getErrors();
 // [
-//   'Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdLength'
+//   'Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdWithoutUnterscheidungsmerkmalLength'
 //    => 'Wirtschafts-ID must be 11 characters long. Provided Wirtschafts-ID is: 10 characters long.',
 // ]
 ```
 
 ## Plausibility hints
 
-You can get a list of hints explaining why the provided input is not plausible. The `validate()` method returns a DTO with a `getHints()` method.
+You can get a list of hints explaining why the provided input is not plausible. Hints do not change the validation result.  The `validate()` method returns a DTO with a `getHints()` method.
 
 > [!NOTE]
 > The keys of `getHints()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\InvalidWirtschaftsIdLength::class`.
@@ -103,6 +110,9 @@ validateWirtschaftsId('DE123456788-00002')->getHints();
 //    => 'Unterscheidungsmerkmal (after -) is typically "00001" before year 2026.',
 // ]
 ```
+
+> [!TIP]
+> You can of course use the alternative way of validation presented in the [Usage](#usage) section. 
 
 ## Testing
 
