@@ -1,8 +1,6 @@
 /.idea
 /.phpunit.cache
 /build
-/coverage
-/docs
 /vendor
 .DS_Store
 composer.lock
