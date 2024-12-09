@@ -23,6 +23,8 @@ dataset('valid', [
     'DE237998736',
     'DE220178622',
     'DE191592010',
+    // Following have been shared within retrievable testdata with ERiC Datenabholung for Bereitstellungsdatenart WIdNrVA
+    'DE103810007',
 ]);
 
 dataset('valid-with-unterscheidungsmerkmal', [
