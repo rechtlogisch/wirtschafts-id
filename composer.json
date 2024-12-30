@@ -42,16 +42,18 @@
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
+        "arch": "vendor/bin/pest --group=arch",
         "coverage": "vendor/bin/pest --coverage --min=98",
         "format": "vendor/bin/pint",
         "quality": [
+            "@arch",
             "@format",
             "@test",
             "@analyse",
             "@types",
             "@coverage"
         ],
-        "test": "vendor/bin/pest",
+        "test": "vendor/bin/pest --exclude-group=arch",
         "types": "vendor/bin/pest --type-coverage --min=100"
     },
     "config": {
