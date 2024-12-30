@@ -3,10 +3,6 @@
 use Rechtlogisch\WirtschaftsId\WirtschaftsId;
 
 it('returns a hint for unterscheidungsmerkmal different than 00001 before year 2026', function (string $wirtschaftsId) {
-    if (date('Y') >= 2026) {
-        $this->markTestSkipped('This test is only relevant before year 2026.');
-    }
-
     $result = (new WirtschaftsId($wirtschaftsId))->validate();
 
     expect($result->isValid())->toBeTrue()
@@ -17,4 +13,4 @@ it('returns a hint for unterscheidungsmerkmal different than 00001 before year 2
 })->with([
     'DE123456788-00002',
     'DE123456788-99999',
-]);
+])->skip(date('Y') >= 2026, 'This test is only relevant before year 2026.');

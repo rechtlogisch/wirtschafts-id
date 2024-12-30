@@ -49,7 +49,9 @@ final class ValidationResult
 
     public function getFirstErrorKey(): ?string
     {
-        return (string) array_key_first($this->errors ?? []);
+        return (empty($this->errors))
+            ? null
+            : (string) array_key_first($this->errors);
     }
 
     /**
