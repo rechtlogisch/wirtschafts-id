@@ -134,8 +134,8 @@ class WirtschaftsId
             throw new Exceptions\UnterscheidungsmerkmalCantContainOnlyZeros('Unterscheidungsmerkmal (after '.self::SEPARATOR.') can\'t contain only zeros.');
         }
 
-        if ($afterSeparator !== '00001' && date('Y') < 2026) {
-            $this->result->addHint(Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2026::class, 'Unterscheidungsmerkmal (after '.self::SEPARATOR.') is typically "00001" before year 2026.');
+        if ($afterSeparator !== '00001' && date('Y') < 2027) {
+            $this->result->addHint(Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2027::class, 'Unterscheidungsmerkmal (after '.self::SEPARATOR.') is typically "00001" before year 2027.');
         }
     }
 

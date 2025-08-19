@@ -45,7 +45,7 @@ This package supports both validation of the Wirtschafts-ID with and without the
 > Unterscheidungsmerkmal starts at `00001` and therefore `00000` is not valid. 
 
 > [!TIP]
-> At first all entities will receive a Wirtschafts-ID with the Unterscheidungsmerkmal `-00001`. If needed, as of 2026 each economic activity (wirtschaftliche Tätigkeit) will receive a separate Unterscheidungsmerkmal, which will be incremented by one for each economic activity and linked to a tax number of the business or the permanent establishment within the responsible tax office.
+> At first all entities will receive a Wirtschafts-ID with the Unterscheidungsmerkmal `-00001`. If needed, as of 4th quarter of 2027 each economic activity (wirtschaftliche Tätigkeit) will receive a separate Unterscheidungsmerkmal, which will be incremented by one for each economic activity and linked to a tax number of the business or the permanent establishment within the responsible tax office (cf. [bzst.de](https://www.bzst.de/DE/Unternehmen/Identifikationsnummern/Wirtschafts-Identifikationsnummer/wirtschaftsidentifikationsnummer_node.html#js-toc-entry4)).
 > 
 > Source: [BZSt](https://www.bzst.de/DE/Unternehmen/Identifikationsnummern/Wirtschafts-Identifikationsnummer/wirtschaftsidentifikationsnummer_node.html#js-toc-entry4)
 
@@ -101,13 +101,13 @@ use Rechtlogisch\WirtschaftsId\WirtschaftsId;
 You can get a list of hints explaining why the provided input is not plausible. Hints do not change the validation result.  The `validate()` method returns a DTO with a `getHints()` method.
 
 > [!NOTE]
-> The keys of `getHints()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2026::class`.
+> The keys of `getHints()` hold the stringified reference to the exception class. You can check for a particular error by comparing to the ::class constant. For example: `Rechtlogisch\WirtschaftsId\Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2027::class`.
 
 ```php
 validateWirtschaftsId('DE123456788-00002')->getHints();
 // [
-//   'Rechtlogisch\WirtschaftsId\Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2026'
-//    => 'Unterscheidungsmerkmal (after -) is typically "00001" before year 2026.',
+//   'Rechtlogisch\WirtschaftsId\Exceptions\UnterscheidungsmerkmalShouldBe00001BeforeYear2027'
+//    => 'Unterscheidungsmerkmal (after -) is typically "00001" before year 2027.',
 // ]
 ```
 
